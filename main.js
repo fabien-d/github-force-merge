@@ -5,11 +5,12 @@
     let base = document.querySelector('.base-ref').textContent;
     let head = document.querySelector('.head-ref').textContent;
 
-    if (base !== 'master' && head !== 'staging') {
-        return false;
-    }
+    const requiredMergeTypeClass = base==='master' && head==='staging' ?'is-merging' : 'is-squashing' ;
 
     setInterval(() => {
-        [...div.querySelectorAll('.js-details-target')].map(item => div.classList.contains('is-merging') ? item.removeAttribute('disabled') : item.setAttribute('disabled', 'disabled'));
+        [...div.querySelectorAll('.js-details-target')]
+            .map(item =>
+                 div.classList.contains(requiredMergeTypeClass) ? item.removeAttribute('disabled') : item.setAttribute('disabled', 'disabled')
+                );
     }, 1500);
 })();
